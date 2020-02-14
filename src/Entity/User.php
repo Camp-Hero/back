@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource()
- * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class Utilisateur
+class User
 {
     /**
      * @ORM\Id()
@@ -29,16 +29,6 @@ class Utilisateur
     private $surname;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $age;
-
-    /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private $phone;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $mail;
@@ -47,6 +37,16 @@ class Utilisateur
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $age;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $phone;
 
     public function getId(): ?int
     {
@@ -77,30 +77,6 @@ class Utilisateur
         return $this;
     }
 
-    public function getAge(): ?int
-    {
-        return $this->age;
-    }
-
-    public function setAge(int $age): self
-    {
-        $this->age = $age;
-
-        return $this;
-    }
-
-    public function getPhone(): ?string
-    {
-        return $this->phone;
-    }
-
-    public function setPhone(string $phone): self
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
     public function getMail(): ?string
     {
         return $this->mail;
@@ -124,4 +100,29 @@ class Utilisateur
 
         return $this;
     }
+
+    public function getAge(): ?int
+    {
+        return $this->age;
+    }
+
+    public function setAge(int $age): self
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+    
 }
