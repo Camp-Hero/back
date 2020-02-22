@@ -12,6 +12,8 @@ init:
 	make install-deps
 	make db-create
 	make db-update
+	make openssl genrsa -out config/jwt/private.pem -des3 -passout pass:6EQUJ5wow! 4096
+	make openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem -passin pass:6EQUJ5wow!
 
 #
 # File Creation
