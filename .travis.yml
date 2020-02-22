@@ -1,0 +1,30 @@
+language: php
+
+matrix:
+  include:
+  - php : 7.4
+
+
+env:
+  global:
+    TEST_CONFIG="phpunit.xml.dist"
+    DOCKER_COMPOSE_VERSION=1.4.2
+
+before_install:
+- sudo rm /usr/local/bin/docker-compose
+- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+- chmod +x docker-compose
+- sudo mv docker-compose /usr/local/bin
+
+before_script:
+- travis_retry
+- cp .env.dist .env
+- composer self-update
+- composer install --no-scripts
+
+script:
+- bin/phpunit
+
+notifications:
+  email:
+  -  mailer.dev.brice@gmail.com

@@ -26,9 +26,9 @@ services:
     image: mysql:5.7
 
     environment:
-      - MYSQL_DATABASE=symfony
-      - MYSQL_ROOT_PASSWORD=
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    - MYSQL_DATABASE=camphero
+    - MYSQL_ROOT_PASSWORD=
+    - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'db:/var/lib/mysql'
 
