@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- *
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  */
 class Event
@@ -23,29 +22,25 @@ class Event
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $beginHour;
+    private $presentation;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime")
      */
-    private $endHour;
+    private $beginDate;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime")
      */
-    private $location;
+    private $endDate;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $description;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $numberParticipant;
+    private $user;
 
     public function getId(): ?int
     {
@@ -64,62 +59,50 @@ class Event
         return $this;
     }
 
-    public function getBeginHour(): ?string
+    public function getPresentation(): ?string
     {
-        return $this->beginHour;
+        return $this->presentation;
     }
 
-    public function setBeginHour(string $beginHour): self
+    public function setPresentation(?string $presentation): self
     {
-        $this->beginHour = $beginHour;
+        $this->presentation = $presentation;
 
         return $this;
     }
 
-    public function getEndHour(): ?string
+    public function getBeginDate(): ?\DateTimeInterface
     {
-        return $this->endHour;
+        return $this->beginDate;
     }
 
-    public function setEndHour(string $endHour): self
+    public function setBeginDate(\DateTimeInterface $beginDate): self
     {
-        $this->endHour = $endHour;
+        $this->beginDate = $beginDate;
 
         return $this;
     }
 
-    public function getLocation(): ?string
+    public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->location;
+        return $this->endDate;
     }
 
-    public function setLocation(string $location): self
+    public function setEndDate(\DateTimeInterface $endDate): self
     {
-        $this->location = $location;
+        $this->endDate = $endDate;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getUser(): ?User
     {
-        return $this->description;
+        return $this->user;
     }
 
-    public function setDescription(string $description): self
+    public function setUser(?User $user): self
     {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getNumberParticipant(): ?int
-    {
-        return $this->numberParticipant;
-    }
-
-    public function setNumberParticipant(int $numberParticipant): self
-    {
-        $this->numberParticipant = $numberParticipant;
+        $this->user = $user;
 
         return $this;
     }
