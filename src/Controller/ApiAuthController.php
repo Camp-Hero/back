@@ -39,7 +39,6 @@ class ApiAuthController extends AbstractController
         if ($violations->count() > 0) {
             return new JsonResponse(["error" => (string)$violations], 500);
         }
-
         $username = $data['username'];
         $password = $data['password'];
         $email = $data['email'];
