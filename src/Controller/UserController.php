@@ -55,8 +55,7 @@ class UserController extends AbstractController
             $plainPassword=$request->get('password');
             $encoded=$encoder->encodePassword($user, $plainPassword);
             $user
-                ->setLastName($request->get('last_name'))
-                ->setFirstName($request->get('first_name'))
+                ->setUsername($request->get('username'))
                 ->setEmail($request->get('email'))
                 ->setPassword($encoded)
             ;
@@ -79,8 +78,7 @@ class UserController extends AbstractController
             if($user)
             {
                 $user
-                    ->setLastName($request->get('last_name'))
-                    ->setFirstName($request->get('first_name'))
+                    ->setUsername($request->get('username'))
                     ->setEmail($request->get('email'))
                     ->setPassword($encoded)
                 ;
