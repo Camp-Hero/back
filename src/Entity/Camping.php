@@ -29,6 +29,11 @@ class Camping
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $postalcode;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $city;
 
     public function getId(): ?int
@@ -56,6 +61,18 @@ class Camping
     public function setAddress(string $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getPostalcode(): ?string
+    {
+        return $this->postalcode;
+    }
+
+    public function setPostalcode(string $postalcode): self
+    {
+        $this->postalcode = $postalcode;
 
         return $this;
     }

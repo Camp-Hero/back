@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\EntityManagerInterface; 
+use Doctrine\ORM\EntityRepository;
 
 /**
  * @method Event|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,11 +15,11 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Event[]    findAll()
  * @method Event[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EventRepository extends ServiceEntityRepository
+class EventRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(EntityManagerInterface $registry, ClassMetadata $event)
     {
-        parent::__construct($registry, Event::class);
+        //parent::__construct($registry, Event::class);
     }
 
     // /**
@@ -47,4 +50,20 @@ class EventRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllEvents()
+    {
+        $query=$this->getEntityManager()->createQuery("select name from event");
+        return $query->getResult();
+
+    }
+
+    public function findEventsByUser(int $userId)
+    {
+        return $this->createQueryBuilder('e')   
+            ->andWhere('e.user_id = :user')
+            ->setParameter('user', $userId)
+            ->getQuery()
+            ->getResult();
+    }
 }

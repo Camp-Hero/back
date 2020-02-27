@@ -12,7 +12,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Camping[]    findAll()
  * @method Camping[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CampingRepository extends ServiceEntityRepository
+class CampingRepository extends ServiceEntityRepository  
 {
     public function __construct(ManagerRegistry $registry)
     {
