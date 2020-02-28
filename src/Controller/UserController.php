@@ -1,21 +1,21 @@
 <?php
 
-    namespace App\Controller;
+namespace App\Controller;
 
-    use App\Entity\User;
-    use App\Entity\Event;
-    use App\Repository\UserRepository;
-    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-    use App\Service\SerializerService;
-    use Doctrine\DBAL\DriverManager;
-    use Doctrine\ORM\EntityManagerInterface;
-    use FOS\RestBundle\Controller\Annotations as Rest;
-    use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
-    use Symfony\Component\HttpFoundation\Response;
-    use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
-    use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-    use Symfony\Component\Security\Core\User\User as UserUser;
-    use Symfony\Component\Security\Core\User\UserInterface as UserEncoded;
+use App\Entity\User;
+use App\Entity\Event;
+use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\SerializerService;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\User as UserUser;
+use Symfony\Component\Security\Core\User\UserInterface as UserEncoded;
 
 class UserController extends AbstractController
     {

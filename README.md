@@ -34,7 +34,7 @@ Start
 $  make start
 ```
 Browse symfony app on : http://localhost:8081/
-Browse the kibana ihm on : http://localhost:5601
+
 
 Stop
 ------------

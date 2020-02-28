@@ -1,0 +1,186 @@
+#config/packages/nelmio_api_doc.yaml
+nelmio_api_doc:
+    documentation:
+        #        schemes: [http, https]
+        swagger: '2.0'
+        info:
+            description: This is Camp'Hero API
+            version: 1.0.0
+            title: Camp'Hero
+            # put the contact info for your development or API team
+            contact:
+                email: you@your-company.com
+
+            license:
+                name: Apache 2.0
+                url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+        # tags are used for organizing operations
+        tags:
+        - name: camping
+          description: Camping
+
+        paths:
+            /camping:
+                get:
+                    tags:
+                    - camping
+                    summary: Get camping
+                    operationId: getCamping
+                    description:
+                        Récupérer camping
+                    produces:
+                    - application/json
+                    responses:
+                        200:
+                            description: search results matching criteria
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/definitions/Camping'
+                        400:
+                            description: bad input parameter
+                        401:
+                            description: not authorized
+                post:
+                    tags:
+                    - camping
+                    summary: Create camping
+                    operationId: addCamping
+                    description: Add a camping
+                    consumes:
+                    - application/json
+                    produces:
+                    - application/json
+                    responses:
+                        201:
+                            description: item created
+                        400:
+                            description: invalid input, object invalid
+                        409:
+                            description: an existing item already exists
+                delete:
+                    tags:
+                    - camping
+                    summary: Delete camping
+                    operationId: deleteCamping
+                    description: Delete a camping
+                    consumes:
+                    - application/json
+                    produces:
+                    - application/json
+                    responses:
+                        201:
+                            description: item deleted
+                        400:
+                            description: invalid input, object invalid
+                        404:
+                            description: item not found
+                put:
+                    tags:
+                    - camping
+                    summary: Update camping
+                    operationId: updateCamping
+                    description: Update a camping
+                    consumes:
+                    - application/json
+                    produces:
+                    - application/json
+                    responses:
+                        201:
+                            description: item updated
+                        400:
+                            description: invalid input, object invalid
+                        404:
+                            description: item not found
+        definitions:
+            User:
+                type: object
+                required:
+                - id
+                - lastname
+                - firstname
+                - age
+                - phone
+                - mail
+                properties:
+                    id:
+                        type: string
+                        format: uuid
+                        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+                    lastname:
+                        type: string
+                        example: Doe
+                    firstname:
+                        type: string
+                        example: John
+                    age:
+                        type: integer
+                        example: 21
+                    phone:
+                        type: string
+                        example: 01234456789
+                    mail:
+                        type: string
+                        example: john@doe.com
+                    password:
+                        type: string
+                        example: gkrodkhordkhpdrkhdp
+            Camping:
+                type: object
+                required:
+                - id
+                - name
+                - address
+                - city
+                - postalCode
+                properties:
+                    id:
+                        type: string
+                        format: uuid
+                        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+                    name:
+                        type: string
+                        example: Camping des flots bleus
+                    address:
+                        type: string
+                        example: Avenue de Biscarrosse
+                    postalCode:
+                        type: integer
+                        example: 33115
+                    city:
+                        type: string
+                        example: Le Pyla sur Mer
+            Comments:
+                type: object
+                required:
+                - id
+                - author
+                - address
+                - city
+                - postalCode
+                properties:
+                    id:
+                        type: string
+                        format: uuid
+                        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+                    name:
+                        type: string
+                        example: Camping des flots bleus
+                    address:
+                        type: string
+                        example: Avenue de Biscarrosse
+                    postalCode:
+                        type: integer
+                        example: 33115
+                    city:
+                        type: string
+                        example: Le Pyla sur Mer
+        # Added by API Auto Mocking Plugin
+        host: virtserver.swaggerhub.com
+        basePath: /CampHero/CampHero/1.0.0
+        schemes:
+        - https
+    areas: # to filter documented areas
+        path_patterns:
+        - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
