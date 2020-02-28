@@ -50,20 +50,4 @@ class EventRepository extends EntityRepository
         ;
     }
     */
-
-    public function findAllEvents()
-    {
-        $query=$this->getEntityManager()->createQuery("select name from event");
-        return $query->getResult();
-
-    }
-
-    public function findEventsByUser(int $userId)
-    {
-        return $this->createQueryBuilder('e')   
-            ->andWhere('e.user_id = :user')
-            ->setParameter('user', $userId)
-            ->getQuery()
-            ->getResult();
-    }
 }

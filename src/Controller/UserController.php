@@ -39,6 +39,7 @@ class UserController extends AbstractController
          */
         public function getOneUser(int $userId, UserRepository $userRepository, SerializerService $serializer)
         {
+            //  Ajout d'une méthode de récupération de l'id 
            $user=$userRepository->find($userId);
            $user=$serializer->serializeData($user);
            return $user;     
@@ -55,7 +56,8 @@ class UserController extends AbstractController
             $plainPassword=$request->get('password');
             $encoded=$encoder->encodePassword($user, $plainPassword);
             $user
-                ->setUsername($request->get('username'))
+                ->setLastName($request->get('last_name'))
+                ->setFirstName($request->get('first_name'))
                 ->setEmail($request->get('email'))
                 ->setPassword($encoded)
             ;
@@ -78,7 +80,8 @@ class UserController extends AbstractController
             if($user)
             {
                 $user
-                    ->setUsername($request->get('username'))
+                    ->setLastName($request->get('last_name'))
+                    ->setFirstName($request->get('first_name'))
                     ->setEmail($request->get('email'))
                     ->setPassword($encoded)
                 ;
@@ -100,7 +103,6 @@ class UserController extends AbstractController
             if($user)
             {
                 $manager->remove($user);
-                $events=$manager->getRepository(Event::class)->findEventsByUser($userId);
                 $manager->flush();
             }
             $response=new Response('Content', Response::HTTP_OK, ['content-type' => 'text/html']);

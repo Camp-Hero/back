@@ -45,12 +45,13 @@ class CampingController extends AbstractController
         public function postCamping(HttpFoundationRequest $request, EntityManagerInterface $manager)
         {
             $camping=new Camping();
-                $camping
-                    ->setName($request->get('name'))
-                    ->setAddress($request->get('address'))
-                    ->setPostalCode($request->get('postalcode'))
-                    ->setCity($request->get('city'))
-                ;
+            $camping
+                ->setName($request->get('name'))
+                ->setAddress($request->get('address'))
+                ->setPostalCode($request->get('postalcode'))
+                ->setCity($request->get('city'))
+                ->setPhone($request->get('phone'))
+            ;
             $manager->persist($camping);
             $manager->flush();
             $response=new Response('Content', Response::HTTP_OK, ['content-type' => 'text/html']);
@@ -71,6 +72,7 @@ class CampingController extends AbstractController
                     ->setAddress($request->get('address'))
                     ->setPostalCode($request->get('postalcode'))
                     ->setCity($request->get('city'))
+                    ->setPhone($request->get('phone'))
                 ;
                 $manager->persist($camping);
                 $manager->flush();
