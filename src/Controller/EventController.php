@@ -69,39 +69,22 @@ class EventController extends AbstractController
         /**
          * Retrieves an Event according to the id
          * @Rest\View()
-         * @Rest\Post("/camping/{campingId}/users/{userId}/events")
+         * @Rest\Post("/campings/{campingId}/events")
          */
-        public function postEvent(int $campingId, int $userId, HttpFoundationRequest $request, EntityManagerInterface $manager)
+        public function postEvent(int $campingId, HttpFoundationRequest $request, EntityManagerInterface $manager)
         {
             $campingRepository=$this->getDoctrine()->getRepository(Camping::class);
-            $camping=$campingRepository->find($campingId);
             $userRepository=$this->getDoctrine()->getRepository(User::class);
-            $user=$userRepository->find($userId);
-            $event=new Event();
-            $event
-                ->setName($request->get('name'))
-                ->setPresentation($request->get('presentation'))
-                ->setBeginDate($request->get('begin_date'))
-                ->setUser($user)
-                ->setEndDate($request->get('end_date'))
-                ->setCamping($camping)
-            ;
-            $manager->persist($event);
-            $manager->flush();
-            $response=new Response('Content', Response::HTTP_OK, ['content-type' => 'text/html']);
-            return $response;
-        }
-
-        /**
-         * Retrieves an Event according to the Camping
-         * @Rest\View()
-         * @Rest\Post("/campings/{campingId}/users/{userId}/events")
-         */
-        public function postEventByCamping(HttpFoundationRequest $request, EntityManagerInterface $manager, int $campingId, int $userId)
-        {
-            $campingRepository=$this->getDoctrine()->getRepository(Camping::class);
             $camping=$campingRepository->find($campingId);
-            $userRepository=$this->getDoctrine()->getRepository(User::class);
+            $token=$request->headers->get("authorization");
+            $tokenParts = explode(".", $token);  
+            $tokenHeader = base64_decode($tokenParts[0]);
+            $tokenPayload = base64_decode($tokenParts[1]);
+            $jwtHeader = json_decode($tokenHeader);
+            $jwtPayload = json_decode($tokenPayload);
+            $user=$jwtPayload->username;
+            $user=$userRepository->findOneBy(array('username' => $user));
+            $userId=$user->getId();
             $user=$userRepository->find($userId);
             $event=new Event();
             $event
