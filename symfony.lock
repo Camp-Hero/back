@@ -230,6 +230,9 @@
     "swiftmailer/swiftmailer": {
         "version": "v6.2.3"
     },
+    "symfony/browser-kit": {
+        "version": "v4.4.5"
+    },
     "symfony/cache": {
         "version": "v4.4.4"
     },
@@ -252,6 +255,9 @@
             "./config/bootstrap.php"
         ]
     },
+    "symfony/css-selector": {
+        "version": "v4.4.5"
+    },
     "symfony/debug": {
         "version": "v4.4.4"
     },
@@ -260,6 +266,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v4.4.4"
+    },
+    "symfony/dom-crawler": {
+        "version": "v4.4.5"
     },
     "symfony/dotenv": {
         "version": "v4.4.4"
@@ -358,6 +367,9 @@
     },
     "symfony/polyfill-php73": {
         "version": "v1.13.1"
+    },
+    "symfony/process": {
+        "version": "v4.4.5"
     },
     "symfony/property-access": {
         "version": "v4.4.4"
@@ -474,6 +486,15 @@
     },
     "symfony/var-exporter": {
         "version": "v4.4.4"
+    },
+    "symfony/web-server-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "dae9b39fd6717970be7601101ce5aa960bf53d9a"
+        }
     },
     "symfony/yaml": {
         "version": "v4.4.4"
