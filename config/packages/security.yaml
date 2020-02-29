@@ -44,7 +44,7 @@ security:
             stateless: true
             anonymous: true
 
-           api:
+        api:
             pattern: ^/api
             stateless: true
             anonymous: false
