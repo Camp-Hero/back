@@ -44,42 +44,52 @@ class CommentController extends AbstractController
      * @Rest\View()
      * @Rest\Get("/events/{eventId}/comments")
      */
-   /* public function getCommentByEvent(int $eventId, SerializerService $serializer)
+    public function getCommentByEvent(int $eventId, SerializerService $serializer)
     {
         $eventRepository=$this->getDoctrine()->getRepository(Event::class);
         $event=$eventRepository->find($eventId);
         $comments=$serializer->serializeData($event->getComments());
         return $comments;
-    }*/
+    }
+
     /**
-     * Create a new Comment resource
-     * @Rest\Post("/events/{eventId}/users/{userId}/comments")
-     * @param Request $request
+     * Retrieves a new Comment resource
+     * @Rest\View()
+     * @Rest\Post("/events/{eventId}/comments")
      */
-    /*public function postComment(int $eventId, int $userId, HttpFoundationRequest $request, EntityManagerInterface $manager)
+    public function postComment(int $eventId, HttpFoundationRequest $request, EntityManagerInterface $manager)
     {
         $eventRepository=$this->getDoctrine()->getRepository(Event::class);
-        $event=$eventRepository->find($eventId);
         $userRepository=$this->getDoctrine()->getRepository(User::class);
+        $event=$eventRepository->find($eventId);
+        $token=$request->headers->get("authorization");
+        $tokenParts = explode(".", $token);  
+        $tokenHeader = base64_decode($tokenParts[0]);
+        $tokenPayload = base64_decode($tokenParts[1]);
+        $jwtHeader = json_decode($tokenHeader);
+        $jwtPayload = json_decode($tokenPayload);
+        $user=$jwtPayload->username;
+        $user=$userRepository->findOneBy(array('username' => $user));
+        $userId=$user->getId();
         $user=$userRepository->find($userId);
         $comment=new Comment();
         $comment
-            ->setText($request->get('text'))
             ->setUser($user)
+            ->setText($request->get('text'))
             ->setEvent($event)
         ;
         $manager->persist($comment);
         $manager->flush();
         $response=new Response('Content', Response::HTTP_OK, ['content-type' => 'text/html']);
         return $response;
-    }*/
+    }
 
-    /**
-     * Changes a Comment resource
-     * @Rest\Put("/comments/{commentId}")
-     */
-    /*public function putComment(int $commentId, HttpFoundationRequest $request, CommentRepository $commentRepository, EntityManagerInterface $manager)
-    {
+        /**
+         * Changes a Comment resource
+         * @Rest\Put("/comments/{commentId}")
+         */
+        public function putComment(int $commentId, HttpFoundationRequest $request, CommentRepository $commentRepository, EntityManagerInterface $manager)
+        {
         $comment=$commentRepository->findOneById($commentId);
         if($comment)
         {
@@ -91,26 +101,21 @@ class CommentController extends AbstractController
         }
         $response=new Response('Content', Response::HTTP_OK, ['content-type' => 'text/html']);
         return $response;
-    }*/
+        }
 
     /**
      * Delete a Comment resource
      * @Rest\Delete("/comments/{commentId}")
      */
-   /* public function deleteComment(int $commentId, CommentRepository $commentRepository, EntityManagerInterface $manager)
+    public function deleteComment(int $commentId, CommentRepository $commentRepository, EntityManagerInterface $manager)
     {
         $comment=$commentRepository->findOneById($commentId);
-       /* if($this->getUser->getId()=$comment->getUser()->getId())
-        {*/
-            /*if($comment)
-            {
-                $manager->remove($comment);
-                $manager->flush();
-            }
-            $response=new Response('Content', Response::HTTP_OK, ['content-type' => 'text/html']);
-            return $response;*/
-        //}
-        
-        
-    //}
+        if($comment)
+        {
+            $manager->remove($comment);
+            $manager->flush();
+        }
+        $response=new Response('Content', Response::HTTP_OK, ['content-type' => 'text/html']);
+        return $response;
+    }
 }

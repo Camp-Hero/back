@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -50,9 +51,14 @@ class Event
     private $camping;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="comment")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="Event", cascade={"remove"})
      */
     private $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -140,7 +146,7 @@ class Event
     {
         if (!$this->comment->contains($comment)) {
             $this->comment[] = $comment;
-            $comment->setUser($this);
+            $comment->setEvent($this);
         }
 
         return $this;

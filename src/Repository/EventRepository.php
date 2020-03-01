@@ -5,9 +5,6 @@ namespace App\Repository;
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\EntityManagerInterface; 
-use Doctrine\ORM\EntityRepository;
 
 /**
  * @method Event|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,11 +12,11 @@ use Doctrine\ORM\EntityRepository;
  * @method Event[]    findAll()
  * @method Event[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EventRepository extends EntityRepository
+class EventRepository extends ServiceEntityRepository
 {
-    public function __construct(EntityManagerInterface $registry, ClassMetadata $event)
+    public function __construct(ManagerRegistry $registry)
     {
-        //parent::__construct($registry, Event::class);
+        parent::__construct($registry, Event::class);
     }
 
     // /**

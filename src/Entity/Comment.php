@@ -28,7 +28,7 @@ class Comment
     private $User;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Event")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Event;

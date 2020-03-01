@@ -43,7 +43,7 @@ class Camping
     private $phone;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="camping")
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="camping", cascade={"remove"})
      */
     private $events;
 
