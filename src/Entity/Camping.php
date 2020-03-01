@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +36,16 @@ class Camping
      * @ORM\Column(type="string", length=255)
      */
     private $city;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $phone;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="camping", cascade={"remove"})
+     */
+    private $events;
 
     public function getId(): ?int
     {
@@ -87,5 +98,22 @@ class Camping
         $this->city = $city;
 
         return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getEvents(): Collection
+    {
+        return $this->events;
     }
 }

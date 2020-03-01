@@ -15,10 +15,12 @@
             $encoders = [new XmlEncoder(), new JsonEncoder()];
             $normalizers = [new ObjectNormalizer()];
             $serializer = new Serializer($normalizers, $encoders);
-            $jsonContent=$serializer->serialize($data, 'json');
+            $jsonContent=$serializer->serialize($data, 'json', ['circular_reference_handler' => function($object){return $object->getId();}]);
             $response=new Response();
             $response->setContent($jsonContent);
             $response->headers->set('Content-Type', 'application/json');
             return $response;  
         }
+
+
     }
